@@ -1,0 +1,5 @@
+<nav class="navbar navbar-default navbar-fixed-bottom">
+  <div class="container-fluid">
+    <h1>Hi,I'm a Footer</h1>
+  </div>
+</nav>
