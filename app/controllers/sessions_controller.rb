@@ -1,8 +1,9 @@
 class SessionsController < ApplicationController
 	layout 'main'
+	before_action :restrict_login_signup, only: [:new,:create]
 	
 	def new
-
+		
 	end
 
 	def create
@@ -19,13 +20,10 @@ class SessionsController < ApplicationController
 	end
 
 	def destroy
-		if logged_in?
-			log_out
-			flash[:info] = "You've been logged out."
-			redirect_to root_url
-		else
-			redirect_to root_url
-		end
+		log_out
+		flash[:info] = "You've been logged out."
+		redirect_to root_url
 	end
-
+	
+	
 end

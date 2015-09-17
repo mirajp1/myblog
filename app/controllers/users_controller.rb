@@ -1,19 +1,19 @@
 class UsersController < ApplicationController
 	layout 'main'
+	before_action :restrict_login_signup, only: [:new,:create]
+	before_action :require_login,only: [:show]
 
 	def new
 		@user=User.new
 	end
 
 	def show
-		@user=current_user
-		if !@user
-			flash[:danger] = "Please Login to continue."
-			redirect_to login_path
-		elsif logged_in? && !@user.admin? && params[:id].to_i != session[:user_id]
+		#only logged_in users will be able to reach here to to before_action Action Controller above
+ 		@user=current_user
+		if !@user.admin? && params[:id].to_i != session[:user_id]
 			flash[:danger] = "Trying to access other's data. Redirecting"
 			redirect_to @user
-		elsif logged_in? && @user.admin?
+		elsif @user.admin?
 			usertemp = User.find_by(id: params[:id])
 			if !usertemp
 				flash[:danger] = "No user data for that id. Redirecting"
