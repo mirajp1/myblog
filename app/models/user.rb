@@ -1,4 +1,7 @@
 class User < ActiveRecord::Base
+	# can be also defined as:  enum access_level: [:normal_user => 0,:admin => 0]
+	enum access_level: [:normal_user,:admin]
+
 	attr_accessor :password
 	validates_presence_of :password
 	validates_length_of :password,minimum: 6

@@ -12,7 +12,7 @@ class SessionsController < ApplicationController
 			log_in(@user)
 			redirect_to @user
 		else
-			flash[:danger] = "There was a problem logging you in."
+			flash[:danger] = "Invalid Email/Password."
 			render 'new'
 		end			
 
