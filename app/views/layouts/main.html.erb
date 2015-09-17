@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>My Blog</title>
+  <title><%= yield(:title) %> | My Blog | RoR Sample App</title>
 <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
@@ -14,12 +14,7 @@
 
 <div class="container">
 
-<% flash.each do |message_type, message| %>
-        <div class="alert alert-<%= message_type %>">
-			<a href="#" class="close" data-dismiss="alert">&times;</a>
-			<%= message %>
-		</div>
-      <% end %>
+<%= render 'shared/flash_messages' %>
 
 <%= yield %>
 
