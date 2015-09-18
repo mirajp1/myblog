@@ -1,14 +1,14 @@
 class UsersController < ApplicationController
 	layout 'main'
 	before_action :restrict_login_signup, only: [:new,:create]
-	before_action :require_login,only: [:show]
+	before_action :require_login,only: [:show,:my_articles]
 
 	def new
 		@user=User.new
 	end
 
 	def show
-		#only logged_in users will be able to reach here to to before_action Action Controller above
+		#only logged_in users will be able to reach here due to before_action Action Controller above
  		@user=current_user
 		if !@user.admin? && params[:id].to_i != session[:user_id]
 			flash[:danger] = "Trying to access other's data. Redirecting"
@@ -33,6 +33,10 @@ class UsersController < ApplicationController
 		else
 			render 'new'
 		end
+	end
+
+	def my_articles
+		
 	end
 
 	private
