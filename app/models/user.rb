@@ -1,4 +1,5 @@
 class User < ActiveRecord::Base
+	has_many :articles,:foreign_key => "author_id",:class_name => :Article
 	# can be also defined as:  enum access_level: [:normal_user => 0,:admin => 0]
 	enum access_level: [:normal_user,:admin]
 
