@@ -1,0 +1,22 @@
+<div class="row comment_form_whole">
+    <div class="col-md-10 col-md-offset-1">
+        <%= form_for([@article,@comment]) do |f| %>
+        <%= render partial: 'shared/error_messages',locals: {temp: @comment} %>
+        <div class="row">
+            <div class="field form-group col-md-6">
+                <%= f.label :body,"Add Comment", class: ' control-label' %>
+            </div>
+		</div>           
+		<div class="row"> 
+			<div class="actions form-group col-md-6">
+                <%= f.text_area :body, class: 'form-control' %>
+	        </div>
+		</div>
+		<div class="row">
+            <div class="actions form-group col-md-6">
+                <%= f.submit class: 'btn btn-primary btn-block' %>
+            </div>
+        </div>
+		<% end %>
+    </div>
+</div>

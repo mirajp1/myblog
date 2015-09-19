@@ -1,0 +1,22 @@
+<% if comment.id %>
+
+<div class="row comment_whole">
+		<div class="col-md-10 col-md-offset-1">
+			
+			<div class="comment_time row">
+					<div class="commentor col-md-2 col-xs-4"><%= comment.commentor.name.titlecase %></div>
+					<span class="glyphicon glyphicon-time col-xs-6 col-md-2"><span style="margin-left:px">
+					<%= time_ago_in_words(comment.created_at) %></span></span>
+					<% if logged_in? && (comment.commentor ==@user || @user.admin?) %>
+						<%= link_to edit_comment_path(comment), :class => 'text-right col-md-8 col-xs-2' do %>
+							<div class="glyphicon glyphicon-edit"></div>
+						<% end %>
+					<% end %>
+				</div>
+			<div class="comment_body row">
+			<div class="col-md-12"><%= simple_format(comment.body) %></div>
+			</div>
+        </div>
+    
+</div>
+<% end %>

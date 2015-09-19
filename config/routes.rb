@@ -6,8 +6,10 @@ Rails.application.routes.draw do
 
   # You can have the root of your site routed with "root"
    root 'welcome#index'
-	resources :users do
-		resources :articles,shallow: true
+	resources :users,shallow: true do
+		resources :articles do
+			resources :comments
+		end
 	end
 	get 'blog' => 'articles#index'
 	get 'my_articles' => 'users#my_articles'

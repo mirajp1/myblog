@@ -1,5 +1,6 @@
 class ArticlesController < ApplicationController
 	layout 'main'
+	
 
 	before_action :require_login, only: [:new,:create,:destroy,:edit,:update]
 
@@ -8,6 +9,8 @@ class ArticlesController < ApplicationController
 		if !@article
 			@article = @user.articles.build
 		end
+		@comb=[@user,@article]
+		
 	end
 
 	def create
@@ -25,6 +28,9 @@ class ArticlesController < ApplicationController
 	def show
 		@user=current_user
 		@article=Article.find_by(id: params[:id])
+		if !@comment
+			@comment=@article.comments.build
+		end
 		if !@article
 			flash[:danger]="Invalid page accessed! Redirecting to home."
 			redirect_to root_url

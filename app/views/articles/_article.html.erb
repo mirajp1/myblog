@@ -1,20 +1,20 @@
-<div class="row">
-    <div class="article_title col-md-9 col-md-offset-1">
+<div class="row article_whole">
+    <div class="article_title col-md-10 col-md-offset-1">
         <div class="page-header">
             <%= link_to article ,id: 'article_title_link' do %><h3><%= article.title %></h3><% end %>
             <div class="article_author"><%= article.author.name.titlecase %></div>
 			
             <div class="article_time row">
-				<span class="glyphicon glyphicon-time col-md-2 col-xs-5"><span style="margin-left:5px"><%= article.created_at.strftime("%d %b %Y") %></span></span>
+				<span class="glyphicon glyphicon-time col-md-2 col-xs-6"><span style="margin-left:5px"><%= article.created_at.strftime("%d %b %Y") %></span></span>
 				<% if logged_in? && (article.author ==@user || @user.admin?) %>
-					<%= link_to edit_article_path(article), :class => 'col-md-1 col-xs-1 col-md-offset-9 col-xs-offset-5' do %>
+					<%= link_to edit_article_path(article), :class => 'text-right col-md-1 col-xs-2 col-md-offset-9 col-xs-offset-4' do %>
 						<div class="glyphicon glyphicon-edit"></div>
 					<% end %>
 				<% end %>
 			</div>
         </div>
     </div>
-    <div class="article_body col-md-9 col-md-offset-1">
+    <div class="article_body col-md-10 col-md-offset-1">
         <%= simple_format(article.body) %>
     </div>
 </div>
