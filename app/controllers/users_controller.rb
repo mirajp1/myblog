@@ -36,7 +36,7 @@ class UsersController < ApplicationController
 	end
 
 	def my_articles
-		
+		@user=current_user
 	end
 
 	private

@@ -32,7 +32,7 @@ class ArticlesController < ApplicationController
 	end
 	
 	def index
-		
+		@user=current_user
 	end
 
 	def edit
