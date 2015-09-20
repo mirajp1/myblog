@@ -18,7 +18,7 @@ class CommentsController < ApplicationController
 			flash[:info] = "Comment Added"
 			redirect_to @article
 		else
-			flash[:danger] = "Comment not added.Error!See below"
+			flash.now[:danger] = "Comment not added.Error!See below"
 			render 'articles/show'				#render becuase to show error
 		end
 	end
@@ -42,7 +42,7 @@ class CommentsController < ApplicationController
 			flash[:info] = "Comment updated"
 			redirect_to @comment.article
 		else
-			flash[:danger] = "Cant Update.Not authorised or errors below"
+			flash.now[:danger] = "Cant Update.Not authorised or errors below"
 			render 'edit'
 		end
 	end
