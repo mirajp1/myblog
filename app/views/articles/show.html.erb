@@ -5,4 +5,4 @@
 <h2>Comments</h2>
 <%= render @article.comments %>
 
-<%= render 'comments/form' %>
+<%= render partial: 'comments/form',locals: {article: @article,comment: @comment} %>

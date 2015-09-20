@@ -9,14 +9,12 @@ class ArticlesController < ApplicationController
 		if !@article
 			@article = @user.articles.build
 		end
-		@comb=[@user,@article]
 		
 	end
 
 	def create
 		@user = current_user
 		@article= @user.articles.build(article_params)
-		@comb=[@user,@article]
 		if @article.save		
 			flash[:info] = "Article Published"
 			redirect_to @article
@@ -28,7 +26,7 @@ class ArticlesController < ApplicationController
 	def show
 		@user=current_user
 		@article=Article.find_by(id: params[:id])
-		if !@comment
+		if !@comment								#check if errors from comments#create
 			@comment=@article.comments.build
 		end
 		if !@article
@@ -42,29 +40,29 @@ class ArticlesController < ApplicationController
 	end
 
 	def edit
-		@user=current_user
+		@temp_user=current_user
+		@user
 		@article=Article.find(params[:id])
-		@comb=[@article]
 		if !@article
 			flash[:danger]="Invalid page accessed! Redirecting to home."
 			redirect_to root_url
 		else
-			if @user != @article.author && !@user.admin?
+			if @temp_user != @article.author && !@temp_user.admin?
 				flash[:danger]="You are not the author of this page.Can't edit. Redirecting"
-				redirect_to @user
+				redirect_to @temp_user
 			end
 		end
 		
 	end
 
 	def update
-		@user=current_user
+		@temp_user=current_user
+		@user
 		@article=Article.find(params[:id])
 		if @article.update(article_params)
 			flash[:info]="Article updated!"
 			redirect_to @article
 		else
-			@comb=[@article]
 			render 'edit'
 		end
 	end
