@@ -21,4 +21,5 @@ Currently following features have been implemented:
 <li>Add Articles and comment on articles </li>
 <li>Non logged-in user can only view published articles & comments</li>
 <li>Admin can edit everything (comments & articles) & Normal_User can edit his own articles and comments</li>
+<li>Deleting articles and comments for authorised users</li>
 </ul>
