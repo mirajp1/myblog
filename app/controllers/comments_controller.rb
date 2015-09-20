@@ -1,6 +1,6 @@
 class CommentsController < ApplicationController
 	layout 'main'
-	before_action :require_login,only: [:create,:edit,:update]
+	before_action :require_login,only: [:create,:edit,:update,:destroy]
 
 	
 	def new 
@@ -45,6 +45,23 @@ class CommentsController < ApplicationController
 			flash.now[:danger] = "Cant Update.Not authorised or errors below"
 			render 'edit'
 		end
+	end
+
+	def destroy
+		@user = current_user
+		@comment=Comment.find_by(id: params[:id])
+		@article = @comment.article
+		if @comment && (@comment.commentor = @user || @user.admin? )
+			if	@comment.destroy
+				flash[:info] = "Comment deleted"+params[:comment_id].to_s
+			else
+				flash[:info] = "Some error in Destroying"
+			end			
+		else
+			flash[:info] = "Can't delete article.Unauthorised"
+		end
+		redirect_to @article
+					
 	end
 
 	private

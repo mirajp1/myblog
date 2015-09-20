@@ -1,6 +1,6 @@
 class User < ActiveRecord::Base
-	has_many :articles,:foreign_key => "author_id",inverse_of: :author
-	has_many :comments,:foreign_key => "commentor_id",inverse_of: :commentor
+	has_many :articles,:foreign_key => "author_id",inverse_of: :author,dependent: :destroy
+	has_many :comments,:foreign_key => "commentor_id",inverse_of: :commentor,dependent: :destroy
 	# can be also defined as:  enum access_level: [:normal_user => 0,:admin => 0]
 	enum access_level: [:normal_user,:admin]
 

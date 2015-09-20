@@ -5,12 +5,18 @@
 			
 			<div class="comment_time row">
 					<div class="commentor col-md-2 col-xs-4"><%= comment.commentor.name.titlecase %></div>
-					<span class="glyphicon glyphicon-time col-xs-6 col-md-2"><span style="margin-left:px">
-					<%= time_ago_in_words(comment.created_at) %></span></span>
+					<span class="glyphicon glyphicon-time col-xs-5 col-md-2"><span>
+					<%= comment.created_at.strftime("%d %b %Y") %></span></span>
+					
 					<% if logged_in? && (comment.commentor ==@user || @user.admin?) %>
-						<%= link_to edit_comment_path(comment), :class => 'text-right col-md-8 col-xs-2' do %>
-							<div class="glyphicon glyphicon-edit"></div>
-						<% end %>
+						<div class=" text-right col-md-8 col-xs-3" >						
+							<%= link_to edit_comment_path(comment), :class => 'edit_comment_button' do %>
+								<div class="glyphicon glyphicon-edit"></div>
+							<% end %>
+							<%= link_to comment_path(comment),method: :delete, data:{confirm: "Are you sure?"} do %>
+								<div class="glyphicon glyphicon-remove"></div>
+							<% end %>
+						</div>
 					<% end %>
 				</div>
 			<div class="comment_body row">

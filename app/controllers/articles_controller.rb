@@ -26,13 +26,13 @@ class ArticlesController < ApplicationController
 	def show
 		@user=current_user
 		@article=Article.find_by(id: params[:id])
-		if !@comment								#check if errors from comments#create
-			@comment=@article.comments.build
-		end
 		if !@article
 			flash[:danger]="Invalid page accessed! Redirecting to home."
 			redirect_to root_url
+		elsif !@comment								#check if errors from comments#create
+			@comment=@article.comments.build
 		end
+		
 	end
 	
 	def index
@@ -65,6 +65,24 @@ class ArticlesController < ApplicationController
 		else
 			render 'edit'
 		end
+	end
+
+	def destroy
+		@user = current_user
+		@article=Article.find_by(id: params[:id])
+		if @article && (@article.author = @user || @user.admin? )
+			if	@article.destroy
+				flash[:info] = "Article deleted"
+				redirect_to my_articles_path
+			else
+				flash[:info] = "Some error"
+				redirect_to my_articles_path
+			end			
+		else
+			flash[:info] = "Can't delete article.Some error"
+			redirect_to @user
+		end
+					
 	end
 
 	private
